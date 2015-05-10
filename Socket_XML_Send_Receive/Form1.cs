@@ -99,6 +99,7 @@ namespace Socket_XML_Send_Receive
             byte[] receivedBytes = new byte[BUFSIZE_FULL];
             port_listen_int = System.Convert.ToInt32(textBoxListenPort.Text);
             string receivedMessage;
+            BufferDecoder bufferDecoder = new BufferDecoder();
             using (server1 = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
             {
                 try
@@ -144,7 +145,7 @@ namespace Socket_XML_Send_Receive
                             else
                             {
                                 int totalMessageBytes = 0;
-                                receivedMessage = DecodeBufferBytes(receivedBytes, totalBytesReceived,encodingType, addLengthToMessageCheckBox.Checked,out totalMessageBytes);
+                                receivedMessage = bufferDecoder.DecodeBufferBytes(receivedBytes, totalBytesReceived,encodingType, addLengthToMessageCheckBox.Checked,out totalMessageBytes);
                                 Debug("SERVER: receptionat " + (totalMessageBytes) + " bytes");
                                 Action writeToTextBoxServer = () =>
                                 {
@@ -175,28 +176,7 @@ namespace Socket_XML_Send_Receive
             }
         }
 
-        private string DecodeBufferBytes(byte[] receivedBytes,int totalBytesReceived, Encoding encoding, bool shouldRemoveLength, out int totalBytesDecoded)
-        {
-            string receivedMessage;
-            if (shouldRemoveLength)
-            {
-                totalBytesDecoded = totalBytesReceived - 4;
-                Array.Copy(receivedBytes, 4, receivedBytes, 0, totalBytesDecoded);
-            }
-            else
-            {
-                totalBytesDecoded = totalBytesReceived;
-            }
-
-            receivedMessage = DecodeBytes(receivedBytes, totalBytesDecoded, encoding);
-            
-            return receivedMessage;
-        }
-
-        private string DecodeBytes(byte[] messageBytes, int totalBytesReceived, Encoding encoding)
-        {
-            return encoding.GetString(messageBytes, 0, (totalBytesReceived));
-        }
+        
         
         private void Send()
         {
