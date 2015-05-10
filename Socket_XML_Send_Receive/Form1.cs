@@ -132,7 +132,7 @@ namespace Socket_XML_Send_Receive
                             Array.Copy(rcvBuffer_full, 4, rcvBuffer_partial, 0, totalBytesReceived - 4);
                             if (addLengthToMessageCheckBox.Checked)
                             {
-                                EncodeReceivedString(rcvBuffer_partial, totalBytesReceived, encodingComboBox, checkBoxSchemaValidation.Checked, label11, richTextBox2);
+                                EncodeReceivedString(rcvBuffer_partial, totalBytesReceived - 4, (Encoding)encodingComboBox.SelectedItem, checkBoxSchemaValidation.Checked, label11.Text, richTextBox2);
                                 Debug("SERVER: receptionat " + (totalBytesReceived - 4) + " bytes");
                                 if (checkBox3.Checked)
                                 {
@@ -144,7 +144,7 @@ namespace Socket_XML_Send_Receive
                             }
                             else
                             {
-                                EncodeReceivedString2(rcvBuffer_full, totalBytesReceived,encodingComboBox,checkBoxSchemaValidation,label11);
+                                EncodeReceivedString(rcvBuffer_full, totalBytesReceived, (Encoding)encodingComboBox.SelectedItem, checkBoxSchemaValidation.Checked, label11.Text, richTextBox2);
                                 Debug("SERVER: receptionat " + totalBytesReceived + " bytes");
                                 if (checkBox3.Checked)
                                 {
@@ -176,34 +176,13 @@ namespace Socket_XML_Send_Receive
             }
         }
 
-        private void EncodeReceivedString2(byte[] rcvBuffer_full, int totalBytesReceived, ComboBox encodingComboBox, CheckBox checkBoxSchemaValidation, Label label11)
+        private void EncodeReceivedString(byte[] rcvBuffer, int totalBytesReceived, Encoding encoding, bool isSchemaValidation, string text, RichTextBox richTextBox2)
         {
-            Encoding encode = (Encoding)encodingComboBox.SelectedItem;
-
-            if (checkBoxSchemaValidation.Checked && (label11.Text != ""))
-            {
-                if (Validation(label11.Text))
-                {
-                    richTextBox2.Text = encode.GetString(rcvBuffer_full, 0, totalBytesReceived);
-                }
-                else
-                {
-                    Debug("SERVER: eroare parsare XML via schema inclusa in antet");
-                }
-            }
-            else
-            {
-                richTextBox2.Text = encode.GetString(rcvBuffer_full, 0, totalBytesReceived);
-            }
-        }
-        private void EncodeReceivedString(byte[] rcvBuffer_partial, int totalBytesReceived, ComboBox encodingComboBox, bool isSchemaValidation, Label label11,RichTextBox richTextBox2)
-        {
-            Encoding encode = (Encoding) encodingComboBox.SelectedItem;
             if (isSchemaValidation && (label11.Text != ""))
             {
-                if (Validation(label11.Text))
+                if (Validation(text))
                 {
-                    richTextBox2.Text = encode.GetString(rcvBuffer_partial, 0, (totalBytesReceived - 4));
+                    richTextBox2.Text = encoding.GetString(rcvBuffer, 0, (totalBytesReceived));
                 }
                 else
                 {
@@ -212,10 +191,11 @@ namespace Socket_XML_Send_Receive
             }
             else
             {
-                richTextBox2.Text = encode.GetString(rcvBuffer_partial, 0, (totalBytesReceived - 4));
+                richTextBox2.Text = encoding.GetString(rcvBuffer, 0, (totalBytesReceived));
             }
 
         }
+        
         private void Send()
         {
             ip_ext = textBox1.Text;
