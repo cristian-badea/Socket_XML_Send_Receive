@@ -411,11 +411,11 @@ namespace Socket_XML_Send_Receive
                 }
             }
         }
-        private void button3_Click(object sender, EventArgs e)
+        private void buttonListen_Click(object sender, EventArgs e)
         {
-            if (button3.Text == "Listen ON")
+            if (buttonListen.Text == "Listen ON")
             {
-                button3.Text = "Listen OFF";
+                buttonListen.Text = "Listen OFF";
                 //button1.Enabled = true;
                 workerThread1 = new Thread(Listener);
                 workerThread1.Start();
@@ -423,7 +423,7 @@ namespace Socket_XML_Send_Receive
             }
             else
             {
-                button3.Text = "Listen ON";
+                buttonListen.Text = "Listen ON";
                 //button1.Enabled = false;
                 try
                 {
@@ -492,9 +492,9 @@ namespace Socket_XML_Send_Receive
         }
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (button3.Text == "Listen OFF")
+            if (buttonListen.Text == "Listen OFF")
             {
-                button3_Click(sender, e);
+                buttonListen_Click(sender, e);
             }
         }
     }

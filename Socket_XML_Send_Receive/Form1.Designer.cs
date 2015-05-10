@@ -39,7 +39,7 @@ namespace Socket_XML_Send_Receive
             this.label3 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
-            this.button3 = new System.Windows.Forms.Button();
+            this.buttonListen = new System.Windows.Forms.Button();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.textBox4 = new System.Windows.Forms.TextBox();
@@ -157,16 +157,16 @@ namespace Socket_XML_Send_Receive
             this.richTextBox2.TabIndex = 20;
             this.richTextBox2.Text = "";
             // 
-            // button3
+            // buttonListen
             // 
-            this.button3.Location = new System.Drawing.Point(456, 289);
-            this.button3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(100, 28);
-            this.button3.TabIndex = 18;
-            this.button3.Text = "Listen ON";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.buttonListen.Location = new System.Drawing.Point(456, 289);
+            this.buttonListen.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonListen.Name = "buttonListen";
+            this.buttonListen.Size = new System.Drawing.Size(100, 28);
+            this.buttonListen.TabIndex = 18;
+            this.buttonListen.Text = "Listen ON";
+            this.buttonListen.UseVisualStyleBackColor = true;
+            this.buttonListen.Click += new System.EventHandler(this.buttonListen_Click);
             // 
             // textBox3
             // 
@@ -462,7 +462,7 @@ namespace Socket_XML_Send_Receive
             this.Controls.Add(this.button4);
             this.Controls.Add(this.richTextBox3);
             this.Controls.Add(this.richTextBox2);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.buttonListen);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.textBox4);
@@ -501,7 +501,7 @@ namespace Socket_XML_Send_Receive
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.RichTextBox richTextBox2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button buttonListen;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBox4;
