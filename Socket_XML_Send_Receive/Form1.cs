@@ -132,12 +132,12 @@ namespace Socket_XML_Send_Receive
                             Array.Copy(rcvBuffer_full, 4, rcvBuffer_partial, 0, totalBytesReceived - 4);
                             if (addLengthToMessageCheckBox.Checked)
                             {
-                                EncodeReceivedString(rcvBuffer_partial, totalBytesReceived - 4, (Encoding)encodingComboBox.SelectedItem, checkBoxSchemaValidation.Checked, label11.Text, richTextBox2);
+                                richTextBox2.Text = DecodeReceivedBytes(rcvBuffer_partial, totalBytesReceived - 4, (Encoding)encodingComboBox.SelectedItem, checkBoxSchemaValidation.Checked, label11.Text);
                                 Debug("SERVER: receptionat " + (totalBytesReceived - 4) + " bytes");
                             }
                             else
                             {
-                                EncodeReceivedString(rcvBuffer_full, totalBytesReceived, (Encoding)encodingComboBox.SelectedItem, checkBoxSchemaValidation.Checked, label11.Text, richTextBox2);
+                                richTextBox2.Text = DecodeReceivedBytes(rcvBuffer_full, totalBytesReceived, (Encoding)encodingComboBox.SelectedItem, checkBoxSchemaValidation.Checked, label11.Text);
                                 Debug("SERVER: receptionat " + totalBytesReceived + " bytes");
                             }
                         }
@@ -162,22 +162,23 @@ namespace Socket_XML_Send_Receive
             }
         }
 
-        private void EncodeReceivedString(byte[] rcvBuffer, int totalBytesReceived, Encoding encoding, bool isSchemaValidation, string text,RichTextBox richTextBox2)
+        private string DecodeReceivedBytes(byte[] rcvBuffer, int totalBytesReceived, Encoding encoding, bool isSchemaValidation, string text)
         {
             if (isSchemaValidation && (label11.Text != ""))
             {
                 if (Validation(text))
                 {
-                    richTextBox2.Text = encoding.GetString(rcvBuffer, 0, (totalBytesReceived));
+                    return encoding.GetString(rcvBuffer, 0, (totalBytesReceived));
                 }
                 else
                 {
                     Debug("SERVER: eroare parsare XML via schema inclusa in antet");
+                    return "";
                 }
             }
             else
             {
-                richTextBox2.Text = encoding.GetString(rcvBuffer, 0, (totalBytesReceived));
+                return encoding.GetString(rcvBuffer, 0, (totalBytesReceived));
             }
 
         }
