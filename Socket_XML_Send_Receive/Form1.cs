@@ -137,7 +137,7 @@ namespace Socket_XML_Send_Receive
                             };
                             encodingComboBox.Invoke(getEncodingType);
 
-                            receivedMessage = DecodeBytes(receivedBytes, totalBytesReceived, encodingType, addLengthToMessageCheckBox.Checked);
+                            receivedMessage = BufferDecoderBytes(receivedBytes, totalBytesReceived, encodingType, addLengthToMessageCheckBox.Checked, checkBoxSchemaValidation.Checked, label11.Text);
 
                             Action writeToTextBoxServer = () =>
                             {
@@ -168,7 +168,7 @@ namespace Socket_XML_Send_Receive
             }
         }
 
-        private string DecodeBytes(byte[] receivedBytes, int totalBytesReceived, Encoding encodingType, bool shouldRemoveLength)
+        private string BufferDecoderBytes(byte[] receivedBytes,int totalBytesReceived, Encoding encoding, bool shouldRemoveLength, bool isSchemaValidation, string text)
         {
             string receivedMessage;
             if (shouldRemoveLength)
@@ -176,30 +176,19 @@ namespace Socket_XML_Send_Receive
                 totalBytesReceived -= 4;
                 Array.Copy(receivedBytes, 4, receivedBytes, 0, totalBytesReceived);
             }
-            receivedMessage = DecodeReceivedBytes(receivedBytes, totalBytesReceived, encodingType, checkBoxSchemaValidation.Checked, label11.Text);
+            if (isSchemaValidation && (text != "") && (!Validation(text)))
+            {
+                Debug("SERVER: eroare parsare XML via schema inclusa in antet");
+                return "";
+            }
+            receivedMessage = DecodeBytes(receivedBytes, totalBytesReceived, encoding);
             Debug("SERVER: receptionat " + (totalBytesReceived) + " bytes");
             return receivedMessage;
         }
 
-        private string DecodeReceivedBytes(byte[] messageBytes, int totalBytesReceived, Encoding encoding, bool isSchemaValidation, string text)
+        private string DecodeBytes(byte[] messageBytes, int totalBytesReceived, Encoding encoding)
         {
-            if (isSchemaValidation && (label11.Text != ""))
-            {
-                if (Validation(text))
-                {
-                    return encoding.GetString(messageBytes, 0, (totalBytesReceived));
-                }
-                else
-                {
-                    Debug("SERVER: eroare parsare XML via schema inclusa in antet");
-                    return "";
-                }
-            }
-            else
-            {
-                return encoding.GetString(messageBytes, 0, (totalBytesReceived));
-            }
-
+            return encoding.GetString(messageBytes, 0, (totalBytesReceived));
         }
         
         private void Send()
