@@ -96,8 +96,7 @@ namespace Socket_XML_Send_Receive
         private void Listener()
         {
             server1 = null;
-            byte[] rcvBuffer_full = new byte[BUFSIZE_FULL];
-            byte[] rcvBuffer_partial = new byte[BUFSIZE];
+            byte[] receivedBytes = new byte[BUFSIZE_FULL];
             port_listen_int = System.Convert.ToInt32(textBoxListenPort.Text);
             using (server1 = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
             {
@@ -121,16 +120,16 @@ namespace Socket_XML_Send_Receive
                         using (client1 = server1.Accept())
                         {
                             Debug("SERVER: client socket <" + client1.RemoteEndPoint + "> conectat");
-                            while ((bytesRcvd = client1.Receive(rcvBuffer_full, 0, rcvBuffer_full.Length, SocketFlags.None)) > 0)
+                            while ((bytesRcvd = client1.Receive(receivedBytes, 0, receivedBytes.Length, SocketFlags.None)) > 0)
                             {
-                                if (totalBytesReceived >= rcvBuffer_full.Length)
+                                if (totalBytesReceived >= receivedBytes.Length)
                                 {
                                     break;
                                 }
                                 totalBytesReceived += bytesRcvd;
                             }
-                            Array.Copy(rcvBuffer_full, 4, rcvBuffer_partial, 0, totalBytesReceived - 4);
                             string receivedMessage;
+
                             Encoding encodingType = null;
                             Action getEncodingType = () =>
                             {
@@ -138,16 +137,8 @@ namespace Socket_XML_Send_Receive
                             };
                             encodingComboBox.Invoke(getEncodingType);
 
-                            if (addLengthToMessageCheckBox.Checked)
-                            {
-                                receivedMessage = DecodeReceivedBytes(rcvBuffer_partial, totalBytesReceived - 4, encodingType, checkBoxSchemaValidation.Checked, label11.Text);
-                                Debug("SERVER: receptionat " + (totalBytesReceived - 4) + " bytes");
-                            }
-                            else
-                            {
-                                receivedMessage = DecodeReceivedBytes(rcvBuffer_full, totalBytesReceived, encodingType, checkBoxSchemaValidation.Checked, label11.Text);
-                                Debug("SERVER: receptionat " + totalBytesReceived + " bytes");
-                            }
+                            receivedMessage = DecodeBytes(receivedBytes, totalBytesReceived, encodingType, addLengthToMessageCheckBox.Checked);
+
                             Action writeToTextBoxServer = () =>
                             {
                                 richTextBoxServer.Text = receivedMessage;
@@ -177,13 +168,26 @@ namespace Socket_XML_Send_Receive
             }
         }
 
-        private string DecodeReceivedBytes(byte[] rcvBuffer, int totalBytesReceived, Encoding encoding, bool isSchemaValidation, string text)
+        private string DecodeBytes(byte[] receivedBytes, int totalBytesReceived, Encoding encodingType, bool shouldRemoveLength)
+        {
+            string receivedMessage;
+            if (shouldRemoveLength)
+            {
+                totalBytesReceived -= 4;
+                Array.Copy(receivedBytes, 4, receivedBytes, 0, totalBytesReceived);
+            }
+            receivedMessage = DecodeReceivedBytes(receivedBytes, totalBytesReceived, encodingType, checkBoxSchemaValidation.Checked, label11.Text);
+            Debug("SERVER: receptionat " + (totalBytesReceived) + " bytes");
+            return receivedMessage;
+        }
+
+        private string DecodeReceivedBytes(byte[] messageBytes, int totalBytesReceived, Encoding encoding, bool isSchemaValidation, string text)
         {
             if (isSchemaValidation && (label11.Text != ""))
             {
                 if (Validation(text))
                 {
-                    return encoding.GetString(rcvBuffer, 0, (totalBytesReceived));
+                    return encoding.GetString(messageBytes, 0, (totalBytesReceived));
                 }
                 else
                 {
@@ -193,7 +197,7 @@ namespace Socket_XML_Send_Receive
             }
             else
             {
-                return encoding.GetString(rcvBuffer, 0, (totalBytesReceived));
+                return encoding.GetString(messageBytes, 0, (totalBytesReceived));
             }
 
         }
