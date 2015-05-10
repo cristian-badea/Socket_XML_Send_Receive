@@ -40,9 +40,9 @@ namespace Socket_XML_Send_Receive
             this.button2 = new System.Windows.Forms.Button();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.buttonListen = new System.Windows.Forms.Button();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBoxListenPort = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.textBoxListenIp = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.richTextBox3 = new System.Windows.Forms.RichTextBox();
             this.button4 = new System.Windows.Forms.Button();
@@ -168,15 +168,15 @@ namespace Socket_XML_Send_Receive
             this.buttonListen.UseVisualStyleBackColor = true;
             this.buttonListen.Click += new System.EventHandler(this.buttonListen_Click);
             // 
-            // textBox3
+            // textBoxListenPort
             // 
-            this.textBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.textBox3.Location = new System.Drawing.Point(280, 290);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(63, 22);
-            this.textBox3.TabIndex = 17;
-            this.textBox3.Text = "10000";
+            this.textBoxListenPort.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.textBoxListenPort.Location = new System.Drawing.Point(280, 290);
+            this.textBoxListenPort.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxListenPort.Name = "textBoxListenPort";
+            this.textBoxListenPort.Size = new System.Drawing.Size(63, 22);
+            this.textBoxListenPort.TabIndex = 17;
+            this.textBoxListenPort.Text = "10000";
             // 
             // label4
             // 
@@ -188,15 +188,15 @@ namespace Socket_XML_Send_Receive
             this.label4.TabIndex = 16;
             this.label4.Text = "Port";
             // 
-            // textBox4
+            // textBoxListenIp
             // 
-            this.textBox4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.textBox4.Location = new System.Drawing.Point(103, 290);
-            this.textBox4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.ReadOnly = true;
-            this.textBox4.Size = new System.Drawing.Size(115, 22);
-            this.textBox4.TabIndex = 15;
+            this.textBoxListenIp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.textBoxListenIp.Location = new System.Drawing.Point(103, 290);
+            this.textBoxListenIp.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxListenIp.Name = "textBoxListenIp";
+            this.textBoxListenIp.ReadOnly = true;
+            this.textBoxListenIp.Size = new System.Drawing.Size(115, 22);
+            this.textBoxListenIp.TabIndex = 15;
             // 
             // label5
             // 
@@ -463,9 +463,9 @@ namespace Socket_XML_Send_Receive
             this.Controls.Add(this.richTextBox3);
             this.Controls.Add(this.richTextBox2);
             this.Controls.Add(this.buttonListen);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.textBoxListenPort);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.textBoxListenIp);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label3);
@@ -502,9 +502,9 @@ namespace Socket_XML_Send_Receive
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.RichTextBox richTextBox2;
         private System.Windows.Forms.Button buttonListen;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox textBoxListenPort;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox textBoxListenIp;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.RichTextBox richTextBox3;
         private System.Windows.Forms.Button button4;

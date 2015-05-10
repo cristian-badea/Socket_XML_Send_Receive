@@ -98,18 +98,18 @@ namespace Socket_XML_Send_Receive
             server1 = null;
             byte[] rcvBuffer_full = new byte[BUFSIZE_FULL];
             byte[] rcvBuffer_partial = new byte[BUFSIZE];
-            port_listen_int = System.Convert.ToInt32(textBox3.Text);
+            port_listen_int = System.Convert.ToInt32(textBoxListenPort.Text);
             using (server1 = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
             {
                 try
                 {
-                    server1.Bind(new IPEndPoint(IPAddress.Parse(textBox4.Text), port_listen_int));
+                    server1.Bind(new IPEndPoint(IPAddress.Parse(textBoxListenIp.Text), port_listen_int));
                     server1.Listen(BACKLOG);
-                    Debug("SERVER: socket <" + textBox4.Text + ":" + port_listen_int.ToString() + "> deschis");
+                    Debug("SERVER: socket <" + textBoxListenIp.Text + ":" + port_listen_int.ToString() + "> deschis");
                 }
                 catch (Exception ex)
                 {
-                    Debug("SERVER: probleme creare server socket <" + textBox4.Text + ":" + port_listen_int.ToString() + ">");
+                    Debug("SERVER: probleme creare server socket <" + textBoxListenIp.Text + ":" + port_listen_int.ToString() + ">");
                     Debug(ex.ToString());
                 }
                 while (true)
@@ -162,7 +162,7 @@ namespace Socket_XML_Send_Receive
             }
         }
 
-        private void EncodeReceivedString(byte[] rcvBuffer, int totalBytesReceived, Encoding encoding, bool isSchemaValidation, string text, RichTextBox richTextBox2)
+        private void EncodeReceivedString(byte[] rcvBuffer, int totalBytesReceived, Encoding encoding, bool isSchemaValidation, string text,RichTextBox richTextBox2)
         {
             if (isSchemaValidation && (label11.Text != ""))
             {
@@ -242,7 +242,7 @@ namespace Socket_XML_Send_Receive
         {
             encodingComboBox.SelectedIndex = 0;
             textBox1.Text = FindLocalIP();
-            textBox4.Text = FindLocalIP();
+            textBoxListenIp.Text = FindLocalIP();
         }
         private void button2_Click(object sender, EventArgs e)
         {
@@ -292,7 +292,7 @@ namespace Socket_XML_Send_Receive
                     {
                         server1.Close();
                         ((IDisposable)server1).Dispose();
-                        Debug("SERVER: socket <" + textBox4.Text + ":" + port_listen_int.ToString() + "> inchis");
+                        Debug("SERVER: socket <" + textBoxListenIp.Text + ":" + port_listen_int.ToString() + "> inchis");
                     }
                 }
                 catch (Exception ex)
