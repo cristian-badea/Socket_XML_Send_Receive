@@ -134,25 +134,11 @@ namespace Socket_XML_Send_Receive
                             {
                                 EncodeReceivedString(rcvBuffer_partial, totalBytesReceived - 4, (Encoding)encodingComboBox.SelectedItem, checkBoxSchemaValidation.Checked, label11.Text, richTextBox2);
                                 Debug("SERVER: receptionat " + (totalBytesReceived - 4) + " bytes");
-                                if (checkBox3.Checked)
-                                {
-                                    /*
-                                    client1.Send(rcvBuffer_partial, 0, rcvBuffer_partial.Length, SocketFlags.None);
-                                    Debug("SERVER: expediat echo data catre client.");
-                                    */
-                                }
                             }
                             else
                             {
                                 EncodeReceivedString(rcvBuffer_full, totalBytesReceived, (Encoding)encodingComboBox.SelectedItem, checkBoxSchemaValidation.Checked, label11.Text, richTextBox2);
                                 Debug("SERVER: receptionat " + totalBytesReceived + " bytes");
-                                if (checkBox3.Checked)
-                                {
-                                    /*
-                                    client1.Send(rcvBuffer_partial, 0, rcvBuffer_partial.Length, SocketFlags.None);
-                                    Debug("SERVER: expediat echo data catre client.");
-                                    */
-                                }
                             }
                         }
                         if (client1 != null)
