@@ -251,79 +251,21 @@ namespace Socket_XML_Send_Receive
 
         private void EncodeReceivedString(byte[] rcvBuffer_partial, int totalBytesReceived, ComboBox encodingComboBox, bool isSchemaValidation, Label label11,RichTextBox richTextBox2)
         {
-            switch (encodingComboBox.Text)
+            Encoding encode = (Encoding) encodingComboBox.SelectedItem;
+            if (isSchemaValidation && (label11.Text != ""))
             {
-                case "ASCII":
-                    if ((isSchemaValidation) && (label11.Text != ""))
-                    {
-                        if (Validation(label11.Text))
-                        {
-                            richTextBox2.Text = Encoding.ASCII.GetString(rcvBuffer_partial, 0, (totalBytesReceived - 4));
-                        }
-                        else
-                        {
-                            Debug("SERVER: eroare parsare XML via schema inclusa in antet");
-                        }
-                    }
-                    else
-                    {
-                        richTextBox2.Text = Encoding.ASCII.GetString(rcvBuffer_partial, 0, (totalBytesReceived - 4));
-                    }
-                    break;
-                case "UTF7":
-                    if ((isSchemaValidation) && (label11.Text != ""))
-                    {
-                        if (Validation(label11.Text))
-                        {
-                            richTextBox2.Text = Encoding.UTF7.GetString(rcvBuffer_partial, 0, (totalBytesReceived - 4));
-                        }
-                        else
-                        {
-                            Debug("SERVER: eroare parsare XML via schema inclusa in antet");
-                        }
-                    }
-                    else
-                    {
-                        richTextBox2.Text = Encoding.UTF7.GetString(rcvBuffer_partial, 0, (totalBytesReceived - 4));
-                    }
-                    break;
-                case "UTF8":
-                    if ((isSchemaValidation) && (label11.Text != ""))
-                    {
-                        if (Validation(label11.Text))
-                        {
-                            richTextBox2.Text = Encoding.UTF8.GetString(rcvBuffer_partial, 0, (totalBytesReceived - 4));
-                        }
-                        else
-                        {
-                            Debug("SERVER: eroare parsare XML via schema inclusa in antet");
-                        }
-                    }
-                    else
-                    {
-                        richTextBox2.Text = Encoding.UTF8.GetString(rcvBuffer_partial, 0, (totalBytesReceived - 4));
-                    }
-                    break;
-                case "Unicode":
-                    if ((isSchemaValidation) && (label11.Text != ""))
-                    {
-                        if (Validation(label11.Text))
-                        {
-                            richTextBox2.Text = Encoding.Unicode.GetString(rcvBuffer_partial, 0, (totalBytesReceived - 4));
-                        }
-                        else
-                        {
-                            Debug("SERVER: eroare parsare XML via schema inclusa in antet");
-                        }
-                    }
-                    else
-                    {
-                        richTextBox2.Text = Encoding.Unicode.GetString(rcvBuffer_partial, 0, (totalBytesReceived - 4));
-                    }
-                    break;
-                default:
-                    //
-                    break;
+                if (Validation(label11.Text))
+                {
+                    richTextBox2.Text = encode.GetString(rcvBuffer_partial, 0, (totalBytesReceived - 4));
+                }
+                else
+                {
+                    Debug("SERVER: eroare parsare XML via schema inclusa in antet");
+                }
+            }
+            else
+            {
+                richTextBox2.Text = encode.GetString(rcvBuffer_partial, 0, (totalBytesReceived - 4));
             }
         }
         private void Send()
