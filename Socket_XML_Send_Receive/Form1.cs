@@ -136,13 +136,16 @@ namespace Socket_XML_Send_Receive
                                 encodingType = (Encoding)encodingComboBox.SelectedItem;
                             };
                             encodingComboBox.Invoke(getEncodingType);
+
                             if ((checkBoxSchemaValidation.Checked && (label11.Text != "")) && (!Validation(label11.Text)))
                             {
                                 Debug("SERVER: eroare parsare XML via schema inclusa in antet");
                             }
                             else
                             {
-                                receivedMessage = DecodeBufferBytes(receivedBytes, totalBytesReceived, encodingType, addLengthToMessageCheckBox.Checked);
+                                int totalMessageBytes = 0;
+                                receivedMessage = DecodeBufferBytes(receivedBytes, totalBytesReceived,encodingType, addLengthToMessageCheckBox.Checked,out totalMessageBytes);
+                                Debug("SERVER: receptionat " + (totalMessageBytes) + " bytes");
                                 Action writeToTextBoxServer = () =>
                                 {
                                     richTextBoxServer.Text = receivedMessage;
@@ -172,16 +175,21 @@ namespace Socket_XML_Send_Receive
             }
         }
 
-        private string DecodeBufferBytes(byte[] receivedBytes,int totalBytesReceived, Encoding encoding, bool shouldRemoveLength)
+        private string DecodeBufferBytes(byte[] receivedBytes,int totalBytesReceived, Encoding encoding, bool shouldRemoveLength, out int totalBytesDecoded)
         {
             string receivedMessage;
             if (shouldRemoveLength)
             {
-                totalBytesReceived -= 4;
-                Array.Copy(receivedBytes, 4, receivedBytes, 0, totalBytesReceived);
+                totalBytesDecoded = totalBytesReceived - 4;
+                Array.Copy(receivedBytes, 4, receivedBytes, 0, totalBytesDecoded);
             }
-            receivedMessage = DecodeBytes(receivedBytes, totalBytesReceived, encoding);
-            Debug("SERVER: receptionat " + (totalBytesReceived) + " bytes");
+            else
+            {
+                totalBytesDecoded = totalBytesReceived;
+            }
+
+            receivedMessage = DecodeBytes(receivedBytes, totalBytesDecoded, encoding);
+            
             return receivedMessage;
         }
 
