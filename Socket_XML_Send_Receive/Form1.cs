@@ -144,80 +144,7 @@ namespace Socket_XML_Send_Receive
                             }
                             else
                             {
-                                switch (encodingComboBox.Text)
-                                {
-                                    case "ASCII":
-                                        if ((checkBoxSchemaValidation.Checked) && (label11.Text != ""))
-                                        {
-                                            if (Validation(label11.Text))
-                                            {
-                                                richTextBox2.Text = Encoding.ASCII.GetString(rcvBuffer_full, 0, totalBytesReceived);
-                                            }
-                                            else
-                                            {
-                                                Debug("SERVER: eroare parsare XML via schema inclusa in antet");
-                                            }
-                                        }
-                                        else
-                                        {
-                                            richTextBox2.Text = Encoding.ASCII.GetString(rcvBuffer_full, 0, totalBytesReceived);
-                                        }
-                                        break;
-                                    case "UTF7":
-                                        if ((checkBoxSchemaValidation.Checked) && (label11.Text != ""))
-                                        {
-                                            if (Validation(label11.Text))
-                                            {
-                                                richTextBox2.Text = Encoding.UTF7.GetString(rcvBuffer_full, 0, totalBytesReceived);
-                                            }
-                                            else
-                                            {
-                                                Debug("SERVER: eroare parsare XML via schema inclusa in antet");
-                                            }
-                                        }
-                                        else
-                                        {
-                                            richTextBox2.Text = Encoding.UTF7.GetString(rcvBuffer_full, 0, totalBytesReceived);
-                                        }
-                                        break;
-                                    case "UTF8":
-                                        if ((checkBoxSchemaValidation.Checked) && (label11.Text != ""))
-                                        {
-                                            if (Validation(label11.Text))
-                                            {
-                                                richTextBox2.Text = Encoding.UTF8.GetString(rcvBuffer_full, 0, totalBytesReceived);
-                                            }
-                                            else
-                                            {
-                                                Debug("SERVER: eroare parsare XML via schema inclusa in antet");
-                                            }
-                                        }
-                                        else
-                                        {
-                                            richTextBox2.Text = Encoding.UTF8.GetString(rcvBuffer_full, 0, totalBytesReceived);
-                                        }
-                                        break;
-                                    case "Unicode":
-                                        if ((checkBoxSchemaValidation.Checked) && (label11.Text != ""))
-                                        {
-                                            if (Validation(label11.Text))
-                                            {
-                                                richTextBox2.Text = Encoding.Unicode.GetString(rcvBuffer_full, 0, totalBytesReceived);
-                                            }
-                                            else
-                                            {
-                                                Debug("SERVER: eroare parsare XML via schema inclusa in antet");
-                                            }
-                                        }
-                                        else
-                                        {
-                                            richTextBox2.Text = Encoding.Unicode.GetString(rcvBuffer_full, 0, totalBytesReceived);
-                                        }
-                                        break;
-                                    default:
-                                        //
-                                        break;
-                                }
+                                EncodeReceivedString2(rcvBuffer_full, totalBytesReceived,encodingComboBox,checkBoxSchemaValidation,label11);
                                 Debug("SERVER: receptionat " + totalBytesReceived + " bytes");
                                 if (checkBox3.Checked)
                                 {
@@ -249,6 +176,84 @@ namespace Socket_XML_Send_Receive
             }
         }
 
+        private void EncodeReceivedString2(byte[] rcvBuffer_full, int totalBytesReceived, ComboBox encodingComboBox, CheckBox checkBoxSchemaValidation, Label label11)
+        {
+            switch (encodingComboBox.Text)
+            {
+                case "ASCII":
+                    if ((checkBoxSchemaValidation.Checked) && (label11.Text != ""))
+                    {
+                        if (Validation(label11.Text))
+                        {
+                            richTextBox2.Text = Encoding.ASCII.GetString(rcvBuffer_full, 0, totalBytesReceived);
+                        }
+                        else
+                        {
+                            Debug("SERVER: eroare parsare XML via schema inclusa in antet");
+                        }
+                    }
+                    else
+                    {
+                        richTextBox2.Text = Encoding.ASCII.GetString(rcvBuffer_full, 0, totalBytesReceived);
+                    }
+                    break;
+                case "UTF7":
+                    if ((checkBoxSchemaValidation.Checked) && (label11.Text != ""))
+                    {
+                        if (Validation(label11.Text))
+                        {
+                            richTextBox2.Text = Encoding.UTF7.GetString(rcvBuffer_full, 0, totalBytesReceived);
+                        }
+                        else
+                        {
+                            Debug("SERVER: eroare parsare XML via schema inclusa in antet");
+                        }
+                    }
+                    else
+                    {
+                        richTextBox2.Text = Encoding.UTF7.GetString(rcvBuffer_full, 0, totalBytesReceived);
+                    }
+                    break;
+                case "UTF8":
+                    if ((checkBoxSchemaValidation.Checked) && (label11.Text != ""))
+                    {
+                        if (Validation(label11.Text))
+                        {
+                            richTextBox2.Text = Encoding.UTF8.GetString(rcvBuffer_full, 0, totalBytesReceived);
+                        }
+                        else
+                        {
+                            Debug("SERVER: eroare parsare XML via schema inclusa in antet");
+                        }
+                    }
+                    else
+                    {
+                        richTextBox2.Text = Encoding.UTF8.GetString(rcvBuffer_full, 0, totalBytesReceived);
+                    }
+                    break;
+                case "Unicode":
+                    if ((checkBoxSchemaValidation.Checked) && (label11.Text != ""))
+                    {
+                        if (Validation(label11.Text))
+                        {
+                            richTextBox2.Text = Encoding.Unicode.GetString(rcvBuffer_full, 0, totalBytesReceived);
+                        }
+                        else
+                        {
+                            Debug("SERVER: eroare parsare XML via schema inclusa in antet");
+                        }
+                    }
+                    else
+                    {
+                        richTextBox2.Text = Encoding.Unicode.GetString(rcvBuffer_full, 0, totalBytesReceived);
+                    }
+                    break;
+                default:
+                    //
+                    break;
+            }
+        }
+
         private void EncodeReceivedString(byte[] rcvBuffer_partial, int totalBytesReceived, ComboBox encodingComboBox, bool isSchemaValidation, Label label11,RichTextBox richTextBox2)
         {
             Encoding encode = (Encoding) encodingComboBox.SelectedItem;
@@ -267,6 +272,7 @@ namespace Socket_XML_Send_Receive
             {
                 richTextBox2.Text = encode.GetString(rcvBuffer_partial, 0, (totalBytesReceived - 4));
             }
+
         }
         private void Send()
         {
