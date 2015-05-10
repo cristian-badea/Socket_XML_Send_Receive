@@ -130,16 +130,31 @@ namespace Socket_XML_Send_Receive
                                 totalBytesReceived += bytesRcvd;
                             }
                             Array.Copy(rcvBuffer_full, 4, rcvBuffer_partial, 0, totalBytesReceived - 4);
+                            string receivedMessage;
+                            Encoding encodingType = null;
+                            Action getEncodingType = () =>
+                            {
+                                encodingType = (Encoding)encodingComboBox.SelectedItem;
+                            };
+                            encodingComboBox.Invoke(getEncodingType);
+
                             if (addLengthToMessageCheckBox.Checked)
                             {
-                                richTextBoxServer.Text = DecodeReceivedBytes(rcvBuffer_partial, totalBytesReceived - 4, (Encoding)encodingComboBox.SelectedItem, checkBoxSchemaValidation.Checked, label11.Text);
+                                receivedMessage = DecodeReceivedBytes(rcvBuffer_partial, totalBytesReceived - 4, encodingType, checkBoxSchemaValidation.Checked, label11.Text);
                                 Debug("SERVER: receptionat " + (totalBytesReceived - 4) + " bytes");
                             }
                             else
                             {
-                                richTextBoxServer.Text = DecodeReceivedBytes(rcvBuffer_full, totalBytesReceived, (Encoding)encodingComboBox.SelectedItem, checkBoxSchemaValidation.Checked, label11.Text);
+                                receivedMessage = DecodeReceivedBytes(rcvBuffer_full, totalBytesReceived, encodingType, checkBoxSchemaValidation.Checked, label11.Text);
                                 Debug("SERVER: receptionat " + totalBytesReceived + " bytes");
                             }
+                            Action writeToTextBoxServer = () =>
+                            {
+                                richTextBoxServer.Text = receivedMessage;
+                            };
+
+                            richTextBoxServer.Invoke(writeToTextBoxServer);
+                            
                         }
                         if (client1 != null)
                         {
