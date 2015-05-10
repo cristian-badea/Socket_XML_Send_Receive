@@ -142,7 +142,7 @@ namespace Socket_XML_Send_Receive
                             }
                             else
                             {
-                                receivedMessage = BufferDecoderBytes(receivedBytes, totalBytesReceived, encodingType, addLengthToMessageCheckBox.Checked, checkBoxSchemaValidation.Checked, label11.Text);
+                                receivedMessage = DecodeBufferBytes(receivedBytes, totalBytesReceived, encodingType, addLengthToMessageCheckBox.Checked);
                                 Action writeToTextBoxServer = () =>
                                 {
                                     richTextBoxServer.Text = receivedMessage;
@@ -172,7 +172,7 @@ namespace Socket_XML_Send_Receive
             }
         }
 
-        private string BufferDecoderBytes(byte[] receivedBytes,int totalBytesReceived, Encoding encoding, bool shouldRemoveLength, bool isSchemaValidation, string text)
+        private string DecodeBufferBytes(byte[] receivedBytes,int totalBytesReceived, Encoding encoding, bool shouldRemoveLength)
         {
             string receivedMessage;
             if (shouldRemoveLength)
