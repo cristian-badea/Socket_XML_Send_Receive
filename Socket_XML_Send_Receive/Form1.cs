@@ -98,6 +98,7 @@ namespace Socket_XML_Send_Receive
             server1 = null;
             byte[] receivedBytes = new byte[BUFSIZE_FULL];
             port_listen_int = System.Convert.ToInt32(textBoxListenPort.Text);
+            string receivedMessage;
             using (server1 = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
             {
                 try
@@ -128,24 +129,27 @@ namespace Socket_XML_Send_Receive
                                 }
                                 totalBytesReceived += bytesRcvd;
                             }
-                            string receivedMessage;
-
+                            
                             Encoding encodingType = null;
                             Action getEncodingType = () =>
                             {
                                 encodingType = (Encoding)encodingComboBox.SelectedItem;
                             };
                             encodingComboBox.Invoke(getEncodingType);
-
-                            receivedMessage = BufferDecoderBytes(receivedBytes, totalBytesReceived, encodingType, addLengthToMessageCheckBox.Checked, checkBoxSchemaValidation.Checked, label11.Text);
-
-                            Action writeToTextBoxServer = () =>
+                            if ((checkBoxSchemaValidation.Checked && (label11.Text != "")) && (!Validation(label11.Text)))
                             {
-                                richTextBoxServer.Text = receivedMessage;
-                            };
+                                Debug("SERVER: eroare parsare XML via schema inclusa in antet");
+                            }
+                            else
+                            {
+                                receivedMessage = BufferDecoderBytes(receivedBytes, totalBytesReceived, encodingType, addLengthToMessageCheckBox.Checked, checkBoxSchemaValidation.Checked, label11.Text);
+                                Action writeToTextBoxServer = () =>
+                                {
+                                    richTextBoxServer.Text = receivedMessage;
+                                };
 
-                            richTextBoxServer.Invoke(writeToTextBoxServer);
-                            
+                                richTextBoxServer.Invoke(writeToTextBoxServer);
+                            }
                         }
                         if (client1 != null)
                         {
@@ -175,11 +179,6 @@ namespace Socket_XML_Send_Receive
             {
                 totalBytesReceived -= 4;
                 Array.Copy(receivedBytes, 4, receivedBytes, 0, totalBytesReceived);
-            }
-            if (isSchemaValidation && (text != "") && (!Validation(text)))
-            {
-                Debug("SERVER: eroare parsare XML via schema inclusa in antet");
-                return "";
             }
             receivedMessage = DecodeBytes(receivedBytes, totalBytesReceived, encoding);
             Debug("SERVER: receptionat " + (totalBytesReceived) + " bytes");
