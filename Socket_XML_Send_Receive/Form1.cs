@@ -132,12 +132,12 @@ namespace Socket_XML_Send_Receive
                             Array.Copy(rcvBuffer_full, 4, rcvBuffer_partial, 0, totalBytesReceived - 4);
                             if (addLengthToMessageCheckBox.Checked)
                             {
-                                richTextBox2.Text = DecodeReceivedBytes(rcvBuffer_partial, totalBytesReceived - 4, (Encoding)encodingComboBox.SelectedItem, checkBoxSchemaValidation.Checked, label11.Text);
+                                richTextBoxServer.Text = DecodeReceivedBytes(rcvBuffer_partial, totalBytesReceived - 4, (Encoding)encodingComboBox.SelectedItem, checkBoxSchemaValidation.Checked, label11.Text);
                                 Debug("SERVER: receptionat " + (totalBytesReceived - 4) + " bytes");
                             }
                             else
                             {
-                                richTextBox2.Text = DecodeReceivedBytes(rcvBuffer_full, totalBytesReceived, (Encoding)encodingComboBox.SelectedItem, checkBoxSchemaValidation.Checked, label11.Text);
+                                richTextBoxServer.Text = DecodeReceivedBytes(rcvBuffer_full, totalBytesReceived, (Encoding)encodingComboBox.SelectedItem, checkBoxSchemaValidation.Checked, label11.Text);
                                 Debug("SERVER: receptionat " + totalBytesReceived + " bytes");
                             }
                         }
@@ -350,7 +350,7 @@ namespace Socket_XML_Send_Receive
         }
         private void button6_Click(object sender, EventArgs e)
         {
-            richTextBox2.Clear();
+            richTextBoxServer.Clear();
         }
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {

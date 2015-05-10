@@ -38,7 +38,7 @@ namespace Socket_XML_Send_Receive
             this.inputMessageTextBox = new System.Windows.Forms.RichTextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.richTextBoxServer = new System.Windows.Forms.RichTextBox();
             this.buttonListen = new System.Windows.Forms.Button();
             this.textBoxListenPort = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -148,14 +148,14 @@ namespace Socket_XML_Send_Receive
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // richTextBox2
+            // richTextBoxServer
             // 
-            this.richTextBox2.Location = new System.Drawing.Point(99, 325);
-            this.richTextBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(456, 144);
-            this.richTextBox2.TabIndex = 20;
-            this.richTextBox2.Text = "";
+            this.richTextBoxServer.Location = new System.Drawing.Point(99, 325);
+            this.richTextBoxServer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.richTextBoxServer.Name = "richTextBoxServer";
+            this.richTextBoxServer.Size = new System.Drawing.Size(456, 144);
+            this.richTextBoxServer.TabIndex = 20;
+            this.richTextBoxServer.Text = "";
             // 
             // buttonListen
             // 
@@ -461,7 +461,7 @@ namespace Socket_XML_Send_Receive
             this.Controls.Add(this.label6);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.richTextBox3);
-            this.Controls.Add(this.richTextBox2);
+            this.Controls.Add(this.richTextBoxServer);
             this.Controls.Add(this.buttonListen);
             this.Controls.Add(this.textBoxListenPort);
             this.Controls.Add(this.label4);
@@ -500,7 +500,7 @@ namespace Socket_XML_Send_Receive
         private System.Windows.Forms.RichTextBox inputMessageTextBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.RichTextBox richTextBoxServer;
         private System.Windows.Forms.Button buttonListen;
         private System.Windows.Forms.TextBox textBoxListenPort;
         private System.Windows.Forms.Label label4;
