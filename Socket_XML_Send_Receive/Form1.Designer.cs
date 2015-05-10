@@ -53,7 +53,7 @@ namespace Socket_XML_Send_Receive
             this.encodingComboBox = new System.Windows.Forms.ComboBox();
             this.addLengthToMessageCheckBox = new System.Windows.Forms.CheckBox();
             this.richTextBox4 = new System.Windows.Forms.RichTextBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkBoxSchemaValidation = new System.Windows.Forms.CheckBox();
             this.button5 = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
             this.button6 = new System.Windows.Forms.Button();
@@ -308,17 +308,17 @@ namespace Socket_XML_Send_Receive
             this.richTextBox4.TabIndex = 6;
             this.richTextBox4.Text = "";
             // 
-            // checkBox2
+            // checkBoxSchemaValidation
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(611, 17);
-            this.checkBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(145, 21);
-            this.checkBox2.TabIndex = 3;
-            this.checkBox2.Text = "Schema validation";
-            this.checkBox2.UseVisualStyleBackColor = true;
-            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
+            this.checkBoxSchemaValidation.AutoSize = true;
+            this.checkBoxSchemaValidation.Location = new System.Drawing.Point(611, 17);
+            this.checkBoxSchemaValidation.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkBoxSchemaValidation.Name = "checkBoxSchemaValidation";
+            this.checkBoxSchemaValidation.Size = new System.Drawing.Size(145, 21);
+            this.checkBoxSchemaValidation.TabIndex = 3;
+            this.checkBoxSchemaValidation.Text = "Schema validation";
+            this.checkBoxSchemaValidation.UseVisualStyleBackColor = true;
+            this.checkBoxSchemaValidation.CheckedChanged += new System.EventHandler(this.checkBoxSchemaValidation_CheckedChanged);
             // 
             // button5
             // 
@@ -451,7 +451,7 @@ namespace Socket_XML_Send_Receive
             this.Controls.Add(this.button6);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.button5);
-            this.Controls.Add(this.checkBox2);
+            this.Controls.Add(this.checkBoxSchemaValidation);
             this.Controls.Add(this.richTextBox4);
             this.Controls.Add(this.addLengthToMessageCheckBox);
             this.Controls.Add(this.encodingComboBox);
@@ -515,7 +515,7 @@ namespace Socket_XML_Send_Receive
         private System.Windows.Forms.ComboBox encodingComboBox;
         private System.Windows.Forms.CheckBox addLengthToMessageCheckBox;
         private System.Windows.Forms.RichTextBox richTextBox4;
-        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox checkBoxSchemaValidation;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button button6;

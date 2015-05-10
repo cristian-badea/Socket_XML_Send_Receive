@@ -135,7 +135,7 @@ namespace Socket_XML_Send_Receive
                                 switch (encodingComboBox.Text)
                                 {
                                     case "ASCII":
-                                        if ((checkBox2.Checked) && (label11.Text != ""))
+                                        if ((checkBoxSchemaValidation.Checked) && (label11.Text != ""))
                                         {
                                             if (Validation(label11.Text))
                                             {
@@ -152,7 +152,7 @@ namespace Socket_XML_Send_Receive
                                         }
                                         break;
                                     case "UTF7":
-                                        if ((checkBox2.Checked) && (label11.Text != ""))
+                                        if ((checkBoxSchemaValidation.Checked) && (label11.Text != ""))
                                         {
                                             if (Validation(label11.Text))
                                             {
@@ -169,7 +169,7 @@ namespace Socket_XML_Send_Receive
                                         }
                                         break;
                                     case "UTF8":
-                                        if ((checkBox2.Checked) && (label11.Text != ""))
+                                        if ((checkBoxSchemaValidation.Checked) && (label11.Text != ""))
                                         {
                                             if (Validation(label11.Text))
                                             {
@@ -186,7 +186,7 @@ namespace Socket_XML_Send_Receive
                                         }
                                         break;
                                     case "Unicode":
-                                        if ((checkBox2.Checked) && (label11.Text != ""))
+                                        if ((checkBoxSchemaValidation.Checked) && (label11.Text != ""))
                                         {
                                             if (Validation(label11.Text))
                                             {
@@ -220,7 +220,7 @@ namespace Socket_XML_Send_Receive
                                 switch (encodingComboBox.Text)
                                 {
                                     case "ASCII":
-                                        if ((checkBox2.Checked) && (label11.Text != ""))
+                                        if ((checkBoxSchemaValidation.Checked) && (label11.Text != ""))
                                         {
                                             if (Validation(label11.Text))
                                             {
@@ -237,7 +237,7 @@ namespace Socket_XML_Send_Receive
                                         }
                                         break;
                                     case "UTF7":
-                                        if ((checkBox2.Checked) && (label11.Text != ""))
+                                        if ((checkBoxSchemaValidation.Checked) && (label11.Text != ""))
                                         {
                                             if (Validation(label11.Text))
                                             {
@@ -254,7 +254,7 @@ namespace Socket_XML_Send_Receive
                                         }
                                         break;
                                     case "UTF8":
-                                        if ((checkBox2.Checked) && (label11.Text != ""))
+                                        if ((checkBoxSchemaValidation.Checked) && (label11.Text != ""))
                                         {
                                             if (Validation(label11.Text))
                                             {
@@ -271,7 +271,7 @@ namespace Socket_XML_Send_Receive
                                         }
                                         break;
                                     case "Unicode":
-                                        if ((checkBox2.Checked) && (label11.Text != ""))
+                                        if ((checkBoxSchemaValidation.Checked) && (label11.Text != ""))
                                         {
                                             if (Validation(label11.Text))
                                             {
@@ -355,9 +355,9 @@ namespace Socket_XML_Send_Receive
             InitializeComponent();
         }
 
-        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        private void checkBoxSchemaValidation_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBox2.Checked)
+            if (checkBoxSchemaValidation.Checked)
             {
                 button5.Enabled = true;
                 button2.Enabled = true;
